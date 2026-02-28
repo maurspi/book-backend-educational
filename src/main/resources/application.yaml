@@ -1,3 +1,10 @@
+server:
+  port: 8081  # ⚠️ El Backend corre aquí para no chocar con el Core (8080)
+
 spring:
   application:
     name: book-backend
+
+# Configuración personalizada (Custom Properties)
+book-core:
+  url: http://localhost:8080/api
