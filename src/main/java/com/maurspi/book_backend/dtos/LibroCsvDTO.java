@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder              // Para crear objetos fácil en tus tests
-@NoArgsConstructor    // ¡VITAL! OpenCSV lo necesita sí o sí
+@NoArgsConstructor    // 
 @AllArgsConstructor   // Necesario para que funcione el @Builder
 public class LibroCsvDTO {
     @CsvBindByName(column = "isbn", required=true)
