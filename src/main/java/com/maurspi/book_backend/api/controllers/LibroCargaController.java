@@ -1,10 +1,13 @@
 package com.maurspi.book_backend.api.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.maurspi.book_backend.api.contracts.LibroCargaContract;
+import com.maurspi.book_backend.api.response.LibroResponse;
 import com.maurspi.book_backend.services.LibroCargaService;
 
 import lombok.RequiredArgsConstructor;
@@ -14,11 +17,14 @@ import lombok.RequiredArgsConstructor;
 public class LibroCargaController implements LibroCargaContract  {
     private final LibroCargaService libroCargaService;
 
-    @Override
-    public ResponseEntity<String> subir(MultipartFile file) {
-        libroCargaService.cargar(file);
+    @Override // Asegúrate de actualizar también tu LibroCargaContract (ver paso 3)
+    public ResponseEntity<List<LibroResponse>> subir(MultipartFile file) {
+        
+        // 1. Recibimos la lista del servicio
+        List<LibroResponse> respuestaDelCore = libroCargaService.cargar(file);
 
-        return ResponseEntity.ok("Archivo procesado correctamente.");
+        // 2. La metemos en el body del OK (código 200)
+        return ResponseEntity.ok(respuestaDelCore);
     }
 
 

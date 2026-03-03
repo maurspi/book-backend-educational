@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.maurspi.book_backend.api.request.LibroRequest;
+import com.maurspi.book_backend.api.response.LibroResponse;
 import com.maurspi.book_backend.dtos.LibroCsvDTO;
 import com.maurspi.book_backend.integration.CoreBookClient;
 import com.maurspi.book_backend.mappers.LibroMapper;
@@ -22,7 +23,7 @@ public class LibroCargaService {
     private final LibroMapper libroMapper;
     private final CoreBookClient coreBookClient;
 
-    public ResponseEntity<String> cargar (MultipartFile file){ //leer csv cargado
+    public List<LibroResponse> cargar (MultipartFile file){ //leer csv cargado
         /*
         -----Flujo de carga -----
 
@@ -37,9 +38,15 @@ public class LibroCargaService {
         /*2*/libroValidator.validar(lista);
 
         /*3*/List<LibroRequest> listaTerminada =  libroMapper.mapearADto(lista);
-        
-        /*4*/coreBookClient.guardarLibros(listaTerminada);
+               
+        ///*4*/coreBookClient.guardarLibros(listaTerminada);
+
+         //4 . ¡CAPTURAMOS LA RESPUESTA DEL CORE!
+        List<LibroResponse> librosGuardados = coreBookClient.guardarLibros(listaTerminada);
+
     
-        return ResponseEntity.ok("Proceso finalizado. Se cargaron " + listaTerminada.size() + " libros.");
+        //return ResponseEntity.ok("Proceso finalizado. Se cargaron " + listaTerminada.size() + " libros.");
+
+        return librosGuardados;
     }
 }
