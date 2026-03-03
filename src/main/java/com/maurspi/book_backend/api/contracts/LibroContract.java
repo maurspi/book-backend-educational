@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.maurspi.book_backend.api.response.LibroResponse;
+import com.maurspi.book_backend.api.response.CargaMasivaResponse;
 
 @RequestMapping("/api/libros")
-public interface LibroCargaContract {
+public interface LibroContract {
 
     /**
      * Contrato para la subida de archivos CSV.
      * Define que este endpoint consume 'multipart/form-data' (archivos).
      */
     @PostMapping(value = "/subir", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<List<LibroResponse>> subir(@RequestParam("file") MultipartFile file);
+    ResponseEntity<CargaMasivaResponse> subir(@RequestParam("file") MultipartFile file);
 }
