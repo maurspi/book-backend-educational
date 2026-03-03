@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder              // Para crear objetos fácil en tus tests
-@NoArgsConstructor    // 
-@AllArgsConstructor   // Necesario para que funcione el @Builder
+@Builder              
+@NoArgsConstructor     
+@AllArgsConstructor   
 public class LibroCsvDTO {
     @CsvBindByName(column = "isbn", required=true)
     private String isbn;

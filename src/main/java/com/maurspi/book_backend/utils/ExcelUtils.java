@@ -14,7 +14,6 @@ public class ExcelUtils {
             return Collections.emptyList(); // Si viene vacío no hago nada
         }
 
-        // CORRECCIÓN: Usamos try(...) con paréntesis para cerrar el reader automático
         try (Reader reader = new InputStreamReader(file.getInputStream())) {
             
             return new CsvToBeanBuilder<T>(reader)
