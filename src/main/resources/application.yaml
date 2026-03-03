@@ -7,4 +7,4 @@ spring:
 
 # Configuración personalizada (Custom Properties)
 book-core:
-  url: http://localhost:8080/api
+  url: http://localhost:8080
