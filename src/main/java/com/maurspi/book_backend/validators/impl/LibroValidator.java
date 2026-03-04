@@ -7,10 +7,17 @@ import org.springframework.stereotype.Component;
 import com.maurspi.book_backend.dtos.LibroCsvDTO;
 import com.maurspi.book_backend.validators.IValidadorCsv;
 
-@Component //Singleton (gestionado por el contenedor de Spring). Solo existirá una instancia de este validador en memoria, optimizando recursos.
-
-public class LibroValidator  implements IValidadorCsv<LibroCsvDTO>{       //Single Responsibility Principle (SRP)
-
+/**
+ * Validador de archivos CSV de libros.
+ * 
+ * Patrón aplicado: STRATEGY (implementa una interfaz: IValidadorCsv)
+ * Principio SOLID: SRP (responsabilidad única: validar, en este caso que traiga datos e isbn.)
+ * 
+ * @see IValidadorCsv
+ */
+@Component 
+public class LibroValidator  implements IValidadorCsv<LibroCsvDTO>{   
+    
     @Override
     public void validar(List<LibroCsvDTO> datos) {
         

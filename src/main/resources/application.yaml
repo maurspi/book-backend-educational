@@ -1,5 +1,5 @@
 server:
-  port: 8081  # ⚠️ El Backend corre aquí para no chocar con el Core (8080)
+  port: 8081  # El Backend 8080 para no chocar con el core.
 
 spring:
   application:
