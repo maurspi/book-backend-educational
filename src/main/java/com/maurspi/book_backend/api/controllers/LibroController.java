@@ -23,4 +23,11 @@ public class LibroController implements LibroContract {
         return ResponseEntity.ok(reporteCarga);
     }
 
+    @Override
+    public ResponseEntity<Void> eliminarTodos() {
+        
+        libroCargaService.eliminarTodos();
+        return ResponseEntity.noContent().build();        
+    }
+
 }
