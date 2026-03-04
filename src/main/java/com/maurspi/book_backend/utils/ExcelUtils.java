@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 public class ExcelUtils {
+    
+    //Leo el archivo, convierto CSV (texto plano) → Java (LibroCsvDTO).
+    
 
     public static <T> List<T> convertirCsvALista(MultipartFile file, Class<T> claseDto) {
         if (file.isEmpty()) {
@@ -19,11 +22,11 @@ public class ExcelUtils {
             return new CsvToBeanBuilder<T>(reader)
                     .withType(claseDto)
                     .withIgnoreLeadingWhiteSpace(true)
-                    .withSeparator(';') // Ojo: Excel en español usa punto y coma. Si falla, prueba con ','
+                    .withSeparator(';') // SEPARAR DATOS CON ;
                     .build()
                     .parse();
             
-        } catch (Exception e) { // CORRECCIÓN: Capturamos Exception (que incluye IOException)
+        } catch (Exception e) { 
             throw new RuntimeException("Error al parsear el archivo CSV: " + e.getMessage());
         }
     }

@@ -23,26 +23,28 @@ public class LibroCargaService {
     private final LibroMapper libroMapper;
     private final CoreBookClient coreBookClient;
 
-    // 1. CAMBIAMOS EL TIPO DE RETORNO AQUÍ
+   
     public CargaMasivaResponse cargar(MultipartFile file) {
         /*
-         * -----Flujo de carga -----
+         ************ -----Flujo de carga ---PATRÓN FACADE u Orquestador, -----*************
+
          * ..1: traigo 'lista' con datos en seco
          * ..2: paso la 'lista' por el validador
          * ..3: dicha lista validada la inserto en una nueva lista con el mapeo y pasa a
          * ser una listaTerminada
-         * ..4: envío la listaTerminada al core para su persistencia y capturo lo que me
-         * devuelve.
+         * ..4: envío la listaTerminada al core para su persistencia y capturo lo que me devuelve.
          */
 
         /* 1 */ List<LibroCsvDTO> lista = ExcelUtils.convertirCsvALista(file, LibroCsvDTO.class);
 
-        /* 2 */ libroValidator.validar(lista);
+        /* 2 */ libroValidator.validar(lista); //PATRÓN STRATEGY
 
-        /* 3 */ List<LibroRequest> listaTerminada = libroMapper.mapearADto(lista);
+        /* 3 */ List<LibroRequest> listaTerminada = libroMapper.mapearADto(lista); //PATRÓN ADAPTER para el mapeo y preparar el objeto para enviar al core
 
         // Con feign envio los datos al core
-        /* 4 */ CargaMasivaResponse reporteCarga = coreBookClient.guardarLibros(listaTerminada);
+        /* 4 */ CargaMasivaResponse reporteCarga = coreBookClient.guardarLibros(listaTerminada); //PATRÓN PROXY 
+
+                                                                                                 //Meterme y mostrar target -> url, la cual seteo en application.yml       
 
         return reporteCarga;
     }
