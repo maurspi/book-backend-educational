@@ -769,7 +769,7 @@ curl http://localhost:8081/api/v1/libros/listar
 
 ## 👨‍💻 Autor
 
-**Mauricio Spina**
+**Mauricio Spirilis**
 - GitHub: [@maurspi](https://github.com/maurspi)
 - Proyecto: Sistema de Gestión de Biblioteca con Patrones de Diseño
 
